@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 29</title>
+    
+    <style>
+        .bg{
+            font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-optical-sizing: auto;
+            font-weight: weight;
+            font-style: normal;
+          }
+        body{
+            text-align: center;
+            font-size: 48px;
+            background-color: #f1d3d2;
+           background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+
+            min-height: 100vh;
+        }
+        .container{
+            background-color: rgb(245, 150, 150);
+            height: 200px;
+            margin: 10%;
+            padding: 20px auto;
+            width: 800px;
+            margin: 200px auto;
+        }
+        .date{
+            height: 20px;
+        }
+        .btn{
+            height: 28px;
+            width: 170px;
+            background-image: linear-gradient(19deg, #FAACA8 0%, #DDD6F3 100%);
+            color: rgb(7, 7, 7);
+            font-weight: 800;
+            border-radius: 10px;
+            cursor: pointer;
+            border: none;
+        }
+        .result{
+            color: rgb(23, 22, 22);
+            font-weight: 800;
+            padding-top: 40px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .container{
+                width: 78%;
+                font-size:40px;
+            }
+            .btn{
+                height: 25px;
+                width: 130px;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body class="bg">
+    <div class="container">
+        <label for="date">Enter Date Calculate Difference :</label>
+        <br>
+        <input type="date" id="date1" class="date">
+        <input type="date" id="date2" class="date">
+        <br>
+        <button onclick="calculate()" class="btn">Calculate</button>
+        <button type="button" class="btn" onclick="reset()">Reset</button>
+        <p id="result" class="result">
+
+        </p>
+    </div>
+   
+    <script>
+        function calculate(){
+            const date1_input = document.getElementById('date1').value;
+            const date1 = new Date(date1_input);
+            const date2_input = document.getElementById('date2').value;
+            const date2 = new Date(date2_input);
+
+            let startDate= null;
+            let endDate=null;
+            let yearDiffr =null;
+            let monthDiffr = null;
+            let dateDiffr=null;
+
+            if(date1 > date2)
+            {
+               startDate= date2;
+               endDate= new Date(date1.getFullYear(),date1.getMonth(),date1.getDate()-1,);
+               yearDiffr = endDate.getFullYear() - startDate.getFullYear();
+               monthDiffr = endDate.getMonth() - startDate.getMonth();
+               dateDiffr = endDate.getDate() - startDate.getDate();
+   
+            }
+            else if(date1 < date2)
+            {
+                startDate= date1;
+               endDate= new Date(date2.getFullYear(),date2.getMonth(),date2.getDate()-1,);
+               yearDiffr = endDate.getFullYear() - startDate.getFullYear();
+               monthDiffr = endDate.getMonth() - startDate.getMonth();
+               dateDiffr = endDate.getDate() - startDate.getDate();
+            }
+            document.getElementById('result').innerText = `${yearDiffr} Years : ${monthDiffr} Months : ${dateDiffr} Days `; 
+          
+        }
+
+        function reset(){
+            const input1 = document.getElementById("date1");
+            const input2 = document.getElementById("date2");
+            const result = document.getElementById("result");
+            input1.value = "";
+            input2.value = "";
+            result.innerText = "";
+        }
+        
+       </script>
+</body>
+</html>
